@@ -1,8 +1,24 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserStoreContext } from "../main";
 
 const LoginForm: React.FC = () => {
+  const userStore = useContext(UserStoreContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const handleLogin = () => {
+    userStore.login(email, password);
+
+    setEmail("");
+    setPassword("");
+  };
+
+  const handleRegistration = () => {
+    userStore.registration(email, password);
+
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <div>
@@ -18,8 +34,8 @@ const LoginForm: React.FC = () => {
         type="password"
         placeholder="Password"
       />
-      <button>Login</button>
-      <button>Registration</button>
+      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleRegistration}>Registration</button>
     </div>
   );
 };
