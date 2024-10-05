@@ -25,3 +25,7 @@ export const register = async (
 export const logout = async (): Promise<void> => {
   return api.post("/logout");
 };
+
+export const checkAuth = async () => {
+  return api.get<AuthResponse>("/refresh");
+};

@@ -4,8 +4,12 @@ export interface IUser {
   isActivated: boolean;
 }
 
-export interface AuthResponse {
+export interface UserData {
   accessToken: string;
   refreshToken: string;
   user: IUser;
+}
+
+export interface AuthResponse {
+  userData: UserData;
 }

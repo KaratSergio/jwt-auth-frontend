@@ -1,21 +1,20 @@
 import { useState, useContext } from "react";
+import { observer } from "mobx-react-lite";
 import { UserStoreContext } from "../main";
 
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC = observer(() => {
   const userStore = useContext(UserStoreContext);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleLogin = () => {
-    userStore.login(email, password);
-
+  const handleLogin = async () => {
+    await userStore.login(email, password);
     setEmail("");
     setPassword("");
   };
 
-  const handleRegistration = () => {
-    userStore.registration(email, password);
-
+  const handleRegistration = async () => {
+    await userStore.registration(email, password);
     setEmail("");
     setPassword("");
   };
@@ -38,6 +37,6 @@ const LoginForm: React.FC = () => {
       <button onClick={handleRegistration}>Registration</button>
     </div>
   );
-};
+});
 
 export default LoginForm;
