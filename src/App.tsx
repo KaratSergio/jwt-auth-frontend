@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import LoginForm from "./components/LoginForm";
+import AuthForm from "./components/AuthForm/AuthFrom";
 import { useUserStore } from "./store/useUserStore";
 
 const App = observer(() => {
@@ -17,7 +17,7 @@ const App = observer(() => {
   }
 
   if (!store.isAuth) {
-    return <LoginForm />;
+    return <AuthForm />;
   }
 
   return (
