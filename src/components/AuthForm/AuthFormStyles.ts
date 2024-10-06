@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface StyledButtonProps {
   active?: boolean;
+  'data-active'?: string;
 }
 
 export const Container = styled.div`
@@ -59,10 +60,10 @@ export const Button = styled.button`
   }
 `;
 
-export const ButtonAuth = styled.button<StyledButtonProps>`
+export const BtnAuthForm = styled.button<StyledButtonProps>`
   width: 100%;
   padding: 10px;
-  color: ${({ active }) => (active ? "white" : "black")};
+  color: ${({ 'data-active': active }) => (active === 'true' ? 'white' : 'black')};
   background-color: transparent;
   border: none;
   border-radius: 5px;

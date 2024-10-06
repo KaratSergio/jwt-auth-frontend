@@ -1,11 +1,6 @@
-import { useLocalObservable } from "mobx-react-lite";
-import { IUser } from "../service/types";
-import {
-  handleLogin,
-  handleRegistration,
-  handleLogout,
-  handleCheckAuth,
-} from "./authActions";
+import { useLocalObservable } from 'mobx-react-lite';
+import { IUser } from '../service/types';
+import { handleLogin, handleRegistration, handleLogout, handleCheckAuth } from './authActions';
 
 export const useUserStore = () => {
   const store = useLocalObservable(() => ({
@@ -28,16 +23,18 @@ export const useUserStore = () => {
     async login(email: string, password: string) {
       try {
         await handleLogin(email, password, store.setAuth, store.setUser);
+        await store.checkAuth();
       } catch (error) {
-        console.error("Login error:", error);
+        console.error('Login error:', error);
       }
     },
 
     async registration(email: string, password: string) {
       try {
         await handleRegistration(email, password, store.setAuth, store.setUser);
+        await store.checkAuth();
       } catch (error) {
-        console.error("Registration error:", error);
+        console.error('Registration error:', error);
       }
     },
 
@@ -45,7 +42,7 @@ export const useUserStore = () => {
       try {
         await handleLogout(store.setAuth, store.setUser);
       } catch (error) {
-        console.error("Logout error:", error);
+        console.error('Logout error:', error);
       }
     },
 
@@ -53,7 +50,7 @@ export const useUserStore = () => {
       try {
         await handleCheckAuth(store.setAuth, store.setUser, store.setIsLoading);
       } catch (error) {
-        console.error("CheckAuth error:", error);
+        console.error('CheckAuth error:', error);
       }
     },
   }));

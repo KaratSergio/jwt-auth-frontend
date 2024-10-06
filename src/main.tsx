@@ -1,14 +1,10 @@
-import { createContext } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { useUserStore } from "./store/useUserStore.ts";
+import { useUserStore } from "./store/useUserStore";
+import { UserStoreContext } from "./context/useStoreContext.ts";
 
-export const UserStoreContext = createContext<ReturnType<typeof useUserStore>>(
-  null!
-);
-
-const Root = () => {
+export const Root = () => {
   const store = useUserStore();
 
   return (

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import { Container, Header, ButtonAuth } from "./AuthFormStyles";
+import React, { useState } from 'react';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+import { Container, Header, BtnAuthForm } from './AuthFormStyles';
 
-const Auth: React.FC = () => {
+const AuthForm: React.FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const toggleForm = () => {
@@ -13,16 +13,16 @@ const Auth: React.FC = () => {
   return (
     <Container>
       <Header>
-        <ButtonAuth onClick={toggleForm} active={isLogin}>
+        <BtnAuthForm onClick={toggleForm} data-active={isLogin ? 'true' : 'false'}>
           Login
-        </ButtonAuth>
-        <ButtonAuth onClick={toggleForm} active={!isLogin}>
+        </BtnAuthForm>
+        <BtnAuthForm onClick={toggleForm} data-active={!isLogin ? 'true' : 'false'}>
           Registration
-        </ButtonAuth>
+        </BtnAuthForm>
       </Header>
       {isLogin ? <LoginForm /> : <RegisterForm />}
     </Container>
   );
 };
 
-export default Auth;
+export default AuthForm;
