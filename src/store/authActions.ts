@@ -1,5 +1,5 @@
-import { login, register, logout, checkAuth } from "../service/AuthService";
-import { IUser } from "../service/types";
+import { login, register, logout, checkAuth } from '../service/AuthService';
+import { IUser } from '../service/types';
 
 export const handleLogin = async (
   email: string,
@@ -9,12 +9,12 @@ export const handleLogin = async (
 ) => {
   try {
     const response = await login(email, password);
-    console.log("Login response:", response);
-    localStorage.setItem("token", response.data.userData.accessToken);
+    console.log('Login response:', response);
+    localStorage.setItem('token', response.data.userData.accessToken);
     setAuth(true);
     setUser(response.data.userData.user);
   } catch (error) {
-    console.error((error as Error).message || "An unknown error occurred");
+    console.error((error as Error).message || 'An unknown error occurred');
   }
 };
 
@@ -26,25 +26,22 @@ export const handleRegistration = async (
 ) => {
   try {
     const response = await register(email, password);
-    localStorage.setItem("token", response.data.userData.accessToken);
+    localStorage.setItem('token', response.data.userData.accessToken);
     setAuth(true);
     setUser(response.data.userData.user);
   } catch (error) {
-    console.error((error as Error).message || "An unknown error occurred");
+    console.error((error as Error).message || 'An unknown error occurred');
   }
 };
 
-export const handleLogout = async (
-  setAuth: (isAuth: boolean) => void,
-  setUser: (user: IUser) => void
-) => {
+export const handleLogout = async (setAuth: (isAuth: boolean) => void, setUser: (user: IUser) => void) => {
   try {
     await logout();
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     setAuth(false);
     setUser({} as IUser);
   } catch (error) {
-    console.error((error as Error).message || "An unknown error occurred");
+    console.error((error as Error).message || 'An unknown error occurred');
   }
 };
 
@@ -56,11 +53,11 @@ export const handleCheckAuth = async (
   setIsLoading(true);
   try {
     const response = await checkAuth();
-    localStorage.setItem("token", response.data.userData.accessToken);
+    localStorage.setItem('token', response.data.userData.accessToken);
     setAuth(true);
     setUser(response.data.userData.user);
   } catch (error) {
-    console.error((error as Error).message || "Failed to check authentication");
+    console.error((error as Error).message || 'Failed to check authentication');
   } finally {
     setIsLoading(false);
   }
