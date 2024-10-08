@@ -1,10 +1,12 @@
 import { useLocalObservable } from 'mobx-react-lite';
 import { IUser } from '../service/types';
 import { handleLogin, handleRegistration, handleLogout, handleCheckAuth } from './authActions';
+import { handleGetUsers } from './userActions';
 
 export const useUserStore = () => {
   const store = useLocalObservable(() => ({
     user: {} as IUser,
+    users: [] as IUser[],
     isAuth: false,
     isLoading: false,
 
@@ -14,6 +16,10 @@ export const useUserStore = () => {
 
     setUser(user: IUser) {
       store.user = user;
+    },
+
+    setUsers(users: IUser[]) {
+      store.users = users;
     },
 
     setIsLoading(bool: boolean) {
@@ -52,6 +58,11 @@ export const useUserStore = () => {
       } catch (error) {
         console.error('CheckAuth error:', error);
       }
+    },
+
+    async fetchUsers() {
+      const users = await handleGetUsers();
+      store.setUsers(users);
     },
   }));
 
